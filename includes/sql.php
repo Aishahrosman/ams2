@@ -125,9 +125,9 @@ function tableExists($table){
       static $current_user;
       global $db;
       if(!$current_user){
-         if(isset($_SESSION['id'])):
-             $user_id = intval($_SESSION['id']);
-             $current_user = find_by_id('user',$user_id);
+         if(isset($_SESSION['user_id'])):
+             $user_id = intval($_SESSION['user_id']);
+             $current_user = find_by_id('users',$user_id);
         endif;
       }
     return $current_user;
@@ -136,17 +136,17 @@ function tableExists($table){
   /* Find all user by
   /* Joining users table and user gropus table
   /*--------------------------------------------------------------*/
-  // function find_all_user(){
-  //     global $db;
-  //     $results = array();
-  //     $sql = "SELECT u.id,u.name,u.username,u.user_level,u.status,u.last_login,";
-  //     $sql .="g.group_name ";
-  //     $sql .="FROM user u ";
-  //     $sql .="LEFT JOIN user_groups g ";
-  //     $sql .="ON g.group_level=u.user_level ORDER BY u.name ASC";
-  //     $result = find_by_sql($sql);
-  //     return $result;
-  // }
+  function find_all_user(){
+      global $db;
+      $results = array();
+      $sql = "SELECT u.id,u.name,u.username,u.user_level,u.status,u.last_login,";
+      $sql .="g.group_name ";
+      $sql .="FROM users u ";
+      $sql .="LEFT JOIN user_groups g ";
+      $sql .="ON g.group_level=u.user_level ORDER BY u.name ASC";
+      $result = find_by_sql($sql);
+      return $result;
+  }
   /*--------------------------------------------------------------*/
   /* Function to update the last log in of a user
   /*--------------------------------------------------------------*/
